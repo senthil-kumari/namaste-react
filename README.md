@@ -1,0 +1,13 @@
+-Basic App structure
+-App
+-Header
+-Logo
+-Links
+-Cart
+-Body
+-Search
+-ResCardContainer
+-ResCard
+-Footer
+-Copyright
+-links
