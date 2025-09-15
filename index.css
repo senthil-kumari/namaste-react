@@ -96,3 +96,24 @@ button {
     display: flex;
     margin: 5px;
 }
+.menu-container {
+    width: 80%;
+    padding: 20px;
+}
+.menu-item{
+    display: flex;
+    justify-content: space-between;
+}
+.res-card-container > a{
+    text-decoration: none;
+    color: black
+}
+.about-container {
+     margin: 10px;
+}
+.user-card {
+    border: 1px solid palevioletred;
+    width: 90%;
+    padding: 10px;
+   
+}
