@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { resList } from "../utils/mockData";
+import { RESTAURANT_LIST_API } from "../utils/constants";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState();
   const [searchText, setSearchText] = useState("");
+  const onlineStatus = useOnlineStatus();
   useEffect(() => {
     fetchData();
   }, []);
 
   fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.1864464&lng=72.9754676&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(RESTAURANT_LIST_API);
     const resData = await data.json();
     const exactData =
       resData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
@@ -22,7 +23,8 @@ const Body = () => {
     setRestaurantList(exactData);
     setFilteredRestaurant(exactData);
   };
-
+  if (!onlineStatus)
+    return <div>Looks like you are offline, Go find the internet!!</div>;
   return restaurantList.length === 0 ? (
     <Shimmer />
   ) : (
@@ -57,7 +59,7 @@ const Body = () => {
               (res) => res.info.avgRating > 4.3
             );
             console.log(filteredList, "filteredList");
-            setRestaurantList(filteredList);
+            setFilteredRestaurant(filteredList);
           }}
         >
           Show top rated
@@ -66,7 +68,12 @@ const Body = () => {
       <div className="res-card-container">
         {filteredRestaurant.map((restaurant) => {
           return (
-            <RestaurantCard key={restaurant.info.id} resObj={restaurant} />
+            <Link
+              to={"/restaurants/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
+              <RestaurantCard resObj={restaurant} />
+            </Link>
           );
         })}
       </div>
