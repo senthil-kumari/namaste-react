@@ -28,18 +28,19 @@ const Body = () => {
   return restaurantList.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="filter">
-        <div className="search-bar">
+    <div className="m-4">
+      <div className="flex my-5">
+        <div className="flex">
           <input
             type="text"
-            className="search-box"
+            className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder='Search for anything...'"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
+            className="bg-gray-100 rounded-md px-2 py-1 mx-2 hover:bg-gray-300"
             onClick={() => {
               const searchedItem = restaurantList.filter((res) => {
                 const searchFromString = res.info.name.toLowerCase();
@@ -52,20 +53,23 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          onClick={() => {
-            console.log(restaurantList, "restaurantList");
-            const filteredList = restaurantList.filter(
-              (res) => res.info.avgRating > 4.3
-            );
-            console.log(filteredList, "filteredList");
-            setFilteredRestaurant(filteredList);
-          }}
-        >
-          Show top rated
-        </button>
+        <div className="ml-3">
+          <button
+            className="bg-gray-100 rounded-md px-2 py-1 mx-2 hover:bg-gray-300"
+            onClick={() => {
+              console.log(restaurantList, "restaurantList");
+              const filteredList = restaurantList.filter(
+                (res) => res.info.avgRating > 4.3
+              );
+              console.log(filteredList, "filteredList");
+              setFilteredRestaurant(filteredList);
+            }}
+          >
+            Show top rated
+          </button>
+        </div>
       </div>
-      <div className="res-card-container">
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => {
           return (
             <Link
