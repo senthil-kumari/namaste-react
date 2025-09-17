@@ -1,5 +1,4 @@
 import User from "./User";
-import UserClass from "./UserClass";
 const About = () => {
   return (
     <div className="m-3 p-2 border border-gray-600">

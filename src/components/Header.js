@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center ">
       <div className="w-28">
-        <img src={LOGO_URL} alt="app logo" />
+        <Link to="/">
+          <img src={LOGO_URL} alt="app logo" />{" "}
+        </Link>
       </div>
       <div className="">
         <ul className="flex justify-items-center  ">

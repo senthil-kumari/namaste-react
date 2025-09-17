@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withVeg } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { RESTAURANT_LIST_API } from "../utils/constants";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState();
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+  const VegRestaurant = withVeg(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -46,7 +47,6 @@ const Body = () => {
                 const searchFromString = res.info.name.toLowerCase();
                 return searchFromString.includes(searchText.toLowerCase());
               });
-              console.log("search", searchedItem);
               setFilteredRestaurant(searchedItem);
             }}
           >
@@ -57,11 +57,9 @@ const Body = () => {
           <button
             className="bg-gray-100 rounded-md px-2 py-1 mx-2 hover:bg-gray-300"
             onClick={() => {
-              console.log(restaurantList, "restaurantList");
               const filteredList = restaurantList.filter(
                 (res) => res.info.avgRating > 4.3
               );
-              console.log(filteredList, "filteredList");
               setFilteredRestaurant(filteredList);
             }}
           >
@@ -76,7 +74,11 @@ const Body = () => {
               to={"/restaurants/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard resObj={restaurant} />
+              {restaurant.info.veg ? (
+                <VegRestaurant resObj={restaurant} />
+              ) : (
+                <RestaurantCard resObj={restaurant} />
+              )}
             </Link>
           );
         })}

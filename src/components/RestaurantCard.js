@@ -21,4 +21,17 @@ const RestaurantCard = (props) => {
   );
 };
 
+export const withVeg = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute m-2 p-2 bg-green-800 text-white rounded-lg">
+          Veg
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;
