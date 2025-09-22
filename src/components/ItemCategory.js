@@ -1,18 +1,14 @@
 import { useState } from "react";
 import ItemList from "./ItemList";
 
-const ItemCategory = ({ data }) => {
-  const [showItems, setShowItems] = useState(false);
+const ItemCategory = ({ data, onClick, showItems }) => {
   const { title, itemCards } = data;
 
-  const handleClick = () => {
-    setShowItems(!showItems);
-  };
   return (
     <div key={title} className="m-4 bg-gray-100  shadow-md">
       <div
         className="font-bold py-2 m-2 flex justify-between items-center cursor-pointer"
-        onClick={handleClick}
+        onClick={onClick}
       >
         <span>
           {title} ({itemCards.length})

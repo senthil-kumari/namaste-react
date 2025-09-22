@@ -7,12 +7,10 @@ const ItemList = ({ items }) => {
         const { name, id, isVeg, price, description, imageId, defaultPrice } =
           item.card.info;
         return (
-          <div className="flex m-2 py-3 border-b-2 relative">
+          <div className="flex m-2 py-3 border-b-2 relative" key={id}>
             <div className="w-9/12">
               <div> {isVeg ? "🥗" : "🍗"}</div>
-              <div key={id} className="font-bold text-sm text-slate-800">
-                {name}
-              </div>
+              <div className="font-bold text-sm text-slate-800">{name}</div>
               <div className="text-xs font-bold">
                 ₹ {price ? price / 100 : defaultPrice / 100}
               </div>
