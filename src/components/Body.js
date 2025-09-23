@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 import { RESTAURANT_LIST_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
@@ -11,6 +13,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
   const VegRestaurant = withVeg(RestaurantCard);
+  const { userName, setUserName } = useContext(UserContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -65,6 +68,14 @@ const Body = () => {
           >
             Show top rated
           </button>
+        </div>
+        <div className="ml-3">
+          <label>Name: </label>
+          <input
+            className="border border-blue-400"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-wrap">

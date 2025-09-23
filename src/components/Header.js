@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+  const { userName } = useContext(UserContext);
   return (
     <div className="flex justify-between items-center ">
       <div className="w-28">
@@ -35,6 +38,7 @@ const Header = () => {
               {btnName}
             </button>
           </li>
+          <li className="mx-2 hover:font-bold text-yellow-600">{userName}</li>
         </ul>
       </div>
     </div>

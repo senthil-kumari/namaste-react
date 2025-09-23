@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
 import Footer from "./src/components/Footer";
@@ -9,12 +9,24 @@ import ErrorPage from "./src/components/Error";
 import RestaurantMenu from "./src/components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 const Grocery = lazy(() => import("./src/components/Grocery"));
+import UserContext from "./src/utils/UserContext";
 
 const App = () => {
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    //api call , get username
+    const newName = " Srini";
+    setUserName(newName);
+  }, []);
+
   return (
     <div>
-      <Header />
-      <Outlet />
+      <UserContext.Provider value={{ userName: userName, setUserName }}>
+        <Header />
+
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };
